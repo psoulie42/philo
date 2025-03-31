@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
+/*   Updated: 2025/03/31 16:31:32 by psoulie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+static t_data	*data_check(t_data *data)
+{
+	if (data->nbphilo <= 0 ||\
+			data->tdie <= 0 ||\
+			data->teat <= 0 ||\
+			data->tsleep <= 0 ||\
+			data->nbeat <= 0)
+		return (NULL);
+	return (data);
+}
+
+static t_data	*data_init(char **av)
+{
+	int		i;
+	t_data	*data;
+
+	i = 0;
+	data = (t_data *)malloc(sizeof(t_data));
+	data->nbphilo =  ft_atoi(av[1]);
+	data->tdie = ft_atoi(av[2]);
+	data->teat = ft_atoi(av[3]);
+	data->tsleep = ft_atoi(av[4]);
+	if (av[5] && ft_atoi(av[5] > 0))
+		data->nbeat = ft_atoi(av[5]);
+	else
+		data->nbeat = 0;
+	return (data_check(data));
+}
+
+int	main(int ac, char **av)
+{
+	t_data	*data;
+
+	if (ac < 5)
+		return (printf("too few arguments\n"), 1);
+	if (ac > 6)
+		return (printf("too many arguments\n"), 1);
+	data = data_init(av);
+	if (!data)
+		return (printf("invalid data"), 1);
+}

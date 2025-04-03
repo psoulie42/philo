@@ -6,13 +6,13 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:23 by psoulie           #+#    #+#             */
-/*   Updated: 2025/03/31 15:40:15 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:56:22 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../philo.h"
 
-static int	ftstrncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 	int	res;
 
 	i = 0;
-	if (ftstrncmp(str, "2147483647", 10) == 0)
+	if (ft_strncmp(str, "2147483647", 10) == 0)
 		return (2147483647);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;

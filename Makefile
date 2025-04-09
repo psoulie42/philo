@@ -18,7 +18,7 @@ SRCS = $(addprefix $(SRCSDIR), $(addsuffix .c, $(FILES)))
 OFILES = $(addprefix $(ODIR), $(addsuffix .o, $(FILES)))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -g
 
 NAME = philo
 

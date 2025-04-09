@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/03 14:48:26 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/09 14:24:32 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static t_data	*data_check(t_data *data)
 {
-	if (data->nbphilo <= 0 ||\
+	if ((data->nbphilo <= 0 || data->nbphilo > 200)||\
 			data->tdie <= 0 ||\
 			data->teat <= 0 ||\
 			data->tsleep <= 0 ||\
-			data->nbeat < 0)
-		return (NULL);
+			data->nbeat <= 0)
+		return (free(data), NULL);
+	else
+		data->nbeat = 0;
 	return (data);
 }
 
@@ -32,10 +34,8 @@ static t_data	*data_init(char **av)
 	data->tdie = ft_atoi(av[2]);
 	data->teat = ft_atoi(av[3]);
 	data->tsleep = ft_atoi(av[4]);
-	if (av[5] && ft_atoi(av[5]) > 0)
+	if (av[5])
 		data->nbeat = ft_atoi(av[5]);
-	else
-		data->nbeat = 0;
 	return (data_check(data));
 }
 
@@ -47,7 +47,11 @@ int	main(int ac, char **av)
 		return (printf("too few arguments\n"), 1);
 	if (ac > 6)
 		return (printf("too many arguments\n"), 1);
-	data = data_init(av);
-	if (!data || (av[5] && ft_atoi(av[5]) == 0))
+	if (av[5] && ft_atoi(av[5]) == 0)
 		return (printf("invalid data\n"), 1);
+	data = data_init(av);
+	if (!data)
+		return (printf("invalid data\n"), 1);
+	//run_philosophers(data);
+	return (0);
 }

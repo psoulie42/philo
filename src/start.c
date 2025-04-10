@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/09 14:24:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/10 11:37:18 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static t_data	*data_check(t_data *data)
 	if ((data->nbphilo <= 0 || data->nbphilo > 200)||\
 			data->tdie <= 0 ||\
 			data->teat <= 0 ||\
-			data->tsleep <= 0 ||\
-			data->nbeat <= 0)
+			data->tsleep <= 0)
 		return (free(data), NULL);
 	else
 		data->nbeat = 0;
@@ -47,11 +46,12 @@ int	main(int ac, char **av)
 		return (printf("too few arguments\n"), 1);
 	if (ac > 6)
 		return (printf("too many arguments\n"), 1);
-	if (av[5] && ft_atoi(av[5]) == 0)
+	if (av[5] && ft_atoi(av[5]) <= 0)
 		return (printf("invalid data\n"), 1);
 	data = data_init(av);
 	if (!data)
 		return (printf("invalid data\n"), 1);
-	//run_philosophers(data);
+	data->start_time = get_time();
+	philosophers(data);
 	return (0);
 }

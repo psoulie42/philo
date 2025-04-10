@@ -6,11 +6,15 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:19:12 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/09 15:46:30 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/10 11:40:06 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+static t_philo	*first_philo(t_data *data);
+static t_philo	*new_philo(t_philo *prev, t_data *data, int id);
+static t_philo	*last_philo(t_philo *first, t_philo *prev, t_data *data, int id);
 
 static t_philo	*last_philo(t_philo *first, t_philo *prev, t_data *data, int id)
 {
@@ -29,6 +33,7 @@ static t_philo	*new_philo(t_philo *prev, t_data *data, int id)
 	philo = first_philo(data);
 	philo->id = id;
 	philo->lfork = prev->rfork;
+	philo->print = prev->print;
 	return (philo);
 }
 
@@ -39,6 +44,7 @@ static t_philo	*first_philo(t_data *data)
 	philo = malloc(sizeof(t_philo));
 	philo->id = 1;
 	philo->is_dead = 0;
+	philo->start_time = data->start_time;
 	pthread_mutex_init(&(philo->rfork), NULL);
 	philo->next = NULL;
 	return (philo);
@@ -50,6 +56,7 @@ static t_philo	*philo_init(t_data *data)
 	t_philo	*philo;
 	t_philo	*save;
 
+	pthread_mutex_init(philo->print, NULL);
 	philo = first_philo(data);
 	save = philo;
 	i = 2;
@@ -65,10 +72,10 @@ static t_philo	*philo_init(t_data *data)
 	return (save);
 }
 
-void	run_philosophers(t_data *data)
+void	philosophers(t_data *data)
 {
 	t_philo	*philo;
 
 	philo = philo_init(data);
-
+	run_philo(philo);
 }

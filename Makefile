@@ -12,6 +12,7 @@ ODIR = obj/
 UTILS = utils/
 
 FILES = start \
+		philo \
 		$(UTILS)ft_atoi \
 
 SRCS = $(addprefix $(SRCSDIR), $(addsuffix .c, $(FILES)))

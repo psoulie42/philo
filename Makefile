@@ -13,7 +13,11 @@ UTILS = utils/
 
 FILES = start \
 		philo \
+		actions \
+		run \
+		end \
 		$(UTILS)ft_atoi \
+		$(UTILS)get_time \
 
 SRCS = $(addprefix $(SRCSDIR), $(addsuffix .c, $(FILES)))
 OFILES = $(addprefix $(ODIR), $(addsuffix .o, $(FILES)))

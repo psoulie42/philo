@@ -6,11 +6,18 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:30:25 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 14:14:55 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:50:30 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	is_dead(t_philo **philo)
+{
+	pthread_mutex_lock(&((*philo)->death));
+	*((*philo)->is_dead) = 1;
+	pthread_mutex_lock(&((*philo)->death));
+}
 
 int	monitoring(t_data *data, t_philo *philo)
 {
@@ -25,10 +32,10 @@ int	monitoring(t_data *data, t_philo *philo)
 			while (philo->nbeaten >= data->nbeat && philo->id != first)
 				philo = philo->next;
 			if (philo->id == first)
-				return (0);
+				return (is_dead(&philo), 0);
 		}
 		if (get_new_time(philo->start_time) - philo->last_meal > data->tdie)
-			return (printp(philo, "has died"), philo->is_dead = 1, philo->id);
+			return (printp(philo, "has died"), is_dead(&philo), philo->id);
 		philo = philo->next;
 	}
 	return (-1);
@@ -36,14 +43,22 @@ int	monitoring(t_data *data, t_philo *philo)
 
 void	printp(t_philo *philo, char *str)
 {
-	pthread_mutex_lock(philo->print);
-	printf("%lo %i %s\n", get_new_time(philo->start_time), philo->id, str);
-	pthread_mutex_unlock(philo->print);
+	pthread_mutex_lock(&(philo->death));
+	if (philo->is_dead == 0)
+	{
+		pthread_mutex_lock(&(philo->print));
+		printf("%lo %i %s\n", get_new_time(philo->start_time), philo->id, str);
+		pthread_mutex_unlock(&(philo->print));
+	}
+	pthread_mutex_unlock(&(philo->death));
 }
 
-void	*routine(t_philo *philo)
+void	*routine(void *etst)
 {
-	while (1)
+	t_philo *philo;
+	
+	philo = (t_philo *)etst;
+	while (!check_death(philo))
 	{
 		philo_eat(philo);
 		philo->last_meal = get_new_time(philo->start_time);
@@ -51,6 +66,7 @@ void	*routine(t_philo *philo)
 		philo_sleep(philo);
 		philo_think(philo);
 	}
+	return (NULL);
 }
 
 void	run_philo(t_data *data)
@@ -65,4 +81,5 @@ void	run_philo(t_data *data)
 		printf("wait wtf\n");
 	else if (status == 0)
 		printf("all philosophers have eaten %i times\n", data->nbeat);
+	end_philo(data, philo);
 }

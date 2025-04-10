@@ -18,7 +18,7 @@ typedef	struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		thread;
+	pthread_t		*thread;
 	int				id;
 	int				is_dead;
 	int				teat;
@@ -33,7 +33,7 @@ typedef struct s_philo
 }				t_philo;
 
 // philo
-void	philosophers(t_data *data);
+int	run_philo(t_data *data);
 
 // run
 void	printp(t_philo *philo, char *str);
@@ -41,7 +41,8 @@ void	printp(t_philo *philo, char *str);
 // utils
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-long	get_new_time(t_philo *philo);
+long	get_new_time(long start_time);
 long	get_time(void);
+t_philo	*philo_init(t_data *data);
 
 #endif

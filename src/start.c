@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 11:37:18 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:08:54 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	main(int ac, char **av)
 	if (!data)
 		return (printf("invalid data\n"), 1);
 	data->start_time = get_time();
-	philosophers(data);
+	run_philo(data);
 	return (0);
 }

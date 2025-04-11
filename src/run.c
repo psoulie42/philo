@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:30:25 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 15:50:30 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:38:53 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	*routine(void *etst)
 	t_philo *philo;
 	
 	philo = (t_philo *)etst;
+	if (philo->id % 2 == 0)
+		usleep(20);
 	while (!check_death(philo))
 	{
 		philo_eat(philo);

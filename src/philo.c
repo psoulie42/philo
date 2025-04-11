@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:19:12 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 16:07:30 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:18:42 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_philo	*last_philo(t_philo *first, t_philo *prev, t_data *data, int id)
 	t_philo *philo;
 
 	philo = new_philo(prev, data, id);
-	first->lfork = philo->rfork;
+	first->lfork = &(philo->rfork);
 	philo->next = first;
 	return (philo);
 }
@@ -47,7 +47,7 @@ static t_philo	*new_philo(t_philo *prev, t_data *data, int id)
 	philo = malloc(sizeof(t_philo));
 	philo = first_philo(data, philo);
 	philo->id = id;
-	philo->lfork = prev->rfork;
+	philo->lfork = &(prev->rfork);
 	philo->print = prev->print;
 	philo->is_dead = prev->is_dead;
 	return (philo);

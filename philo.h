@@ -27,7 +27,7 @@ typedef struct s_philo
 	int				nbeaten;
 	long			last_meal;
 	long			start_time;
-	pthread_mutex_t	lfork;
+	pthread_mutex_t	*lfork;
 	pthread_mutex_t	rfork;
 	pthread_mutex_t	death;
 	pthread_mutex_t	print;
@@ -46,12 +46,14 @@ void	printp(t_philo *philo, char *str);
 void	is_dead(t_philo **philo);
 
 // actions
-int		check_death(t_philo *philo);
 void	philo_eat(t_philo *philo);
+void	philo_eat_even(t_philo *philo);
+void	philo_eat_odd(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 
 // end
+int		check_death(t_philo *philo);
 void	end_philo(t_data *data, t_philo *philo);
 
 // utils

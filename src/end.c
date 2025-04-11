@@ -6,11 +6,19 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:09 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 16:10:36 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/11 11:44:01 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+int	check_death(t_philo *philo)
+{
+	pthread_mutex_lock(&(philo->death));
+	if (philo->is_dead)
+		return (pthread_mutex_unlock(&(philo->death)), 1);
+	return (pthread_mutex_unlock(&(philo->death)), 0);
+}
 
 static void	free_philo(t_philo *philo, t_data *data)
 {

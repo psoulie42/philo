@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:30:25 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/11 11:38:53 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:01:37 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	monitoring(t_data *data, t_philo *philo)
 		if (get_new_time(philo->start_time) - philo->last_meal > data->tdie)
 			return (printp(philo, "has died"), is_dead(&philo), philo->id);
 		philo = philo->next;
+		usleep(100);
 	}
 	return (-1);
 }
@@ -63,7 +64,6 @@ void	*routine(void *etst)
 	while (!check_death(philo))
 	{
 		philo_eat(philo);
-		philo->last_meal = get_new_time(philo->start_time);
 		philo->nbeaten++;
 		philo_sleep(philo);
 		philo_think(philo);

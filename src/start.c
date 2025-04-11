@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/10 14:08:54 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/11 14:09:53 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ static t_data	*data_init(char **av)
 	t_data	*data;
 
 	data = (t_data *)malloc(sizeof(t_data));
-	data->nbphilo =  ft_atoi(av[1]);
+	data->nbphilo = ft_atoi(av[1]);
 	data->tdie = ft_atoi(av[2]);
 	data->teat = ft_atoi(av[3]);
 	data->tsleep = ft_atoi(av[4]);
+	data = data_check(data);
 	if (av[5])
 		data->nbeat = ft_atoi(av[5]);
-	return (data_check(data));
+	return (data);
 }
 
 int	main(int ac, char **av)

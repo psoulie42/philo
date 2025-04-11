@@ -61,5 +61,6 @@ int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 long	get_new_time(long start_time);
 long	get_time(void);
+void	ft_sleep(int time, t_philo *philo);
 
 #endif

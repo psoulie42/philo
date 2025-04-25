@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:23 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/03 14:56:22 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:43:45 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ static int	isminus(char a)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+static int	ft_atoi2(const char *str)
 {
 	int	i;
 	int	neg;
 	int	res;
 
 	i = 0;
+	neg = 0;
 	if (ft_strncmp(str, "2147483647", 10) == 0)
 		return (2147483647);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
@@ -57,4 +58,18 @@ int	ft_atoi(const char *str)
 	if (neg == 1)
 		res *= -1;
 	return (res);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < 48 || str[i] > 57)
+			return (0);
+		i++;
+	}
+	return (ft_atoi2(str));
 }

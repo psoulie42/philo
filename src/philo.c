@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:19:12 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/11 11:18:42 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:29:47 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ static t_philo	*new_philo(t_philo *prev, t_data *data, int id)
 static t_philo	*first_philo(t_data *data, t_philo *philo)
 {
 	philo->id = 1;
-	philo->is_dead = 0;
+	philo->is_dead = &data->is_dead;
 	philo->nbeaten = 0;
 	philo->teat = data->teat;
 	philo->tsleep = data->tsleep;
 	philo->start_time = data->start_time;
+	philo->last_meal = data->start_time;
+	philo->death = &data->death;
+	philo->print = &data->print;
+	philo->meal = &data->meal;
 	pthread_mutex_init(&(philo->rfork), NULL);
-	pthread_mutex_init(&(philo->death), NULL);
 	philo->next = NULL;
 	return (philo);
 }
@@ -74,7 +77,6 @@ t_philo	*philo_init(t_data *data)
 	t_philo	*save;
 
 	philo = malloc(sizeof(t_philo));
-	pthread_mutex_init(&(philo->print), NULL);
 	philo->is_dead = 0;
 	philo = first_philo(data, philo);
 	save = philo;

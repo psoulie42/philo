@@ -14,7 +14,11 @@ typedef	struct s_data
 	int		teat;
 	int		tsleep;
 	int		nbeat;
+	int		is_dead;
 	long	start_time;
+	pthread_mutex_t	death;
+	pthread_mutex_t	print;
+	pthread_mutex_t	meal;
 }				t_data;
 
 typedef struct s_philo
@@ -29,8 +33,9 @@ typedef struct s_philo
 	long			start_time;
 	pthread_mutex_t	*lfork;
 	pthread_mutex_t	rfork;
-	pthread_mutex_t	death;
-	pthread_mutex_t	print;
+	pthread_mutex_t	*death;
+	pthread_mutex_t	*print;
+	pthread_mutex_t	*meal;
 	struct s_philo	*next;
 }				t_philo;
 
@@ -43,7 +48,7 @@ int		monitoring(t_data *data, t_philo *philo);
 void	run_philo(t_data *data);
 void	*routine(void *etst);
 void	printp(t_philo *philo, char *str);
-void	is_dead(t_philo **philo);
+void	is_dead(t_philo *philo);
 
 // actions
 void	philo_eat(t_philo *philo);

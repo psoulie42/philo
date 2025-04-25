@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/11 14:09:53 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/25 15:59:44 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ static t_data	*data_init(char **av)
 	data->tdie = ft_atoi(av[2]);
 	data->teat = ft_atoi(av[3]);
 	data->tsleep = ft_atoi(av[4]);
+	data->is_dead = 0;
+	pthread_mutex_init(&data->death, NULL);
+	pthread_mutex_init(&data->print, NULL);
+	pthread_mutex_init(&data->meal, NULL);
 	data = data_check(data);
 	if (av[5])
 		data->nbeat = ft_atoi(av[5]);

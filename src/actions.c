@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:40:50 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/11 15:13:35 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:08:06 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ void	philo_eat_even(t_philo *philo)
 	printp(philo, "has taken the fork to his right");
 	pthread_mutex_lock(philo->lfork);
 	printp(philo, "has taken the fork to his left");
-	philo->last_meal = get_new_time(philo->start_time) + philo->teat;
+	pthread_mutex_lock(philo->meal);
+	philo->last_meal = get_new_time(philo->start_time);
+	philo->nbeaten++;
+	pthread_mutex_unlock(philo->meal);
+	printp(philo, "is eating");
 	ft_sleep(philo->teat, philo);
-	printf("%lo %i teat: %i\n", get_new_time(philo->start_time), philo->id, philo->teat);
 	pthread_mutex_unlock(&(philo->rfork));
 	pthread_mutex_unlock(philo->lfork);
 }
@@ -51,7 +54,10 @@ void	philo_eat_odd(t_philo *philo)
 	printp(philo, "has taken the fork to his left");
 	pthread_mutex_lock((&philo->rfork));
 	printp(philo, "has taken the fork to his right");
-	philo->last_meal = get_new_time(philo->start_time) + philo->teat;
+	pthread_mutex_lock(philo->meal);
+	philo->last_meal = get_new_time(philo->start_time);
+	philo->nbeaten++;
+	pthread_mutex_unlock(philo->meal);
 	printp(philo, "is eating");
 	ft_sleep(philo->teat, philo);
 	pthread_mutex_unlock(philo->lfork);

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:09 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/11 11:44:01 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/04/25 16:25:04 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	check_death(t_philo *philo)
 {
-	pthread_mutex_lock(&(philo->death));
-	if (philo->is_dead)
-		return (pthread_mutex_unlock(&(philo->death)), 1);
-	return (pthread_mutex_unlock(&(philo->death)), 0);
+	pthread_mutex_lock(philo->death);
+	if (*philo->is_dead)
+		return (pthread_mutex_unlock(philo->death), 1);
+	return (pthread_mutex_unlock(philo->death), 0);
 }
 
 static void	free_philo(t_philo *philo, t_data *data)
 {
 	t_philo	*save;
 
-	pthread_mutex_destroy(&(philo->death));
-	pthread_mutex_destroy(&(philo->print));
+	pthread_mutex_destroy(&data->death);
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->meal);
 	pthread_mutex_destroy(&(philo->rfork));
 	while (data->nbphilo)
 	{

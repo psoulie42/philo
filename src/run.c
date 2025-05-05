@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 10:30:25 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/25 16:31:32 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:30:01 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	monitoring(t_data *data, t_philo *philo)
 		}
 		pthread_mutex_lock(philo->meal);
 		if (get_new_time(philo->start_time) - philo->last_meal > data->tdie)
-			return (pthread_mutex_unlock(philo->meal), 
+			return (pthread_mutex_unlock(philo->meal), \
 					printp(philo, "has died"), is_dead(philo), philo->id);
 		pthread_mutex_unlock(philo->meal);
 		philo = philo->next;
@@ -49,22 +49,18 @@ int	monitoring(t_data *data, t_philo *philo)
 
 void	printp(t_philo *philo, char *str)
 {
+	pthread_mutex_lock(philo->print);
 	pthread_mutex_lock(philo->death);
 	if (*philo->is_dead == 0)
-	{
-		pthread_mutex_unlock(philo->death);
-		pthread_mutex_lock(philo->print);
 		printf("%li %i %s\n", get_new_time(philo->start_time), philo->id, str);
-		pthread_mutex_unlock(philo->print);
-	}
-	else
-		pthread_mutex_unlock(philo->death);
+	pthread_mutex_unlock(philo->death);
+	pthread_mutex_unlock(philo->print);
 }
 
 void	*routine(void *etst)
 {
-	t_philo *philo;
-	
+	t_philo	*philo;
+
 	philo = (t_philo *)etst;
 	if (philo->id % 2 == 0)
 		usleep(20);

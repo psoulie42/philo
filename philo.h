@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 17:26:50 by psoulie           #+#    #+#             */
+/*   Updated: 2025/05/05 17:28:41 by psoulie          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -7,15 +19,15 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-typedef	struct s_data
+typedef struct s_data
 {
-	int		nbphilo;
-	int		tdie;
-	int		teat;
-	int		tsleep;
-	int		nbeat;
-	int		is_dead;
-	long	start_time;
+	int				nbphilo;
+	int				tdie;
+	int				teat;
+	int				tsleep;
+	int				nbeat;
+	int				is_dead;
+	long			start_time;
 	pthread_mutex_t	death;
 	pthread_mutex_t	print;
 	pthread_mutex_t	meal;

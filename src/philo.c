@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:19:12 by psoulie           #+#    #+#             */
-/*   Updated: 2025/04/25 16:29:47 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:29:25 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static t_philo	*first_philo(t_data *data, t_philo *philo);
 static t_philo	*new_philo(t_philo *prev, t_data *data, int id);
-static t_philo	*last_philo(t_philo *first, t_philo *prev, t_data *data, int id);
+static t_philo	*last_philo(t_philo *first, \
+		t_philo *prev, t_data *data, int id);
 
 void	create_threads(t_philo *philo)
 {
@@ -32,7 +33,7 @@ void	create_threads(t_philo *philo)
 
 static t_philo	*last_philo(t_philo *first, t_philo *prev, t_data *data, int id)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = new_philo(prev, data, id);
 	first->lfork = &(philo->rfork);

@@ -6,6 +6,7 @@ RED = \033[0;31m
 MAGENTA = \033[0;35m
 CYAN = \033[0;36m
 COLOUR_RESET = \033[0m
+REPLACE = \033[1A\033[K\033[A
 
 SRCSDIR = src/
 ODIR = obj/
@@ -59,16 +60,22 @@ party:
 	@echo "$(BOLD)Let's party!"
 	@echo "$(RED)$(BOLD)  (^-^) $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)"
 	@echo "$(CYAN)$(BOLD) \\(^-^\\) $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)"
 	@echo "$(YELLOW)$(BOLD)  (^-^)  $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)"
 	@echo "$(BLUE)$(BOLD) (/^-^)/ $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)"
 	@echo "$(MAGENTA)$(BOLD)  (^-^)  $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)"
 	@echo "$(GREEN)$(BOLD) \\(^-^)/ $(COLOUR_RESET)"
 	@sleep 0.5
+	@echo "$(REPLACE)\033[A"
 	@echo "$(BOLD)Party time is over! Back to work! \n  (^-^)7$(COLOUR_RESET)"
 
 re: fclean all

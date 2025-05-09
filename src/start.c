@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/05/05 17:30:42 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/05/09 09:23:45 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int ac, char **av)
 	if (data->nbphilo == 1)
 	{
 		solo_philo(data);
+		free(data);
 		return (0);
 	}
 	run_philo(data);

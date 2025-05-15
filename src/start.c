@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
+/*   By: achillesoulie <achillesoulie@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:37:27 by psoulie           #+#    #+#             */
-/*   Updated: 2025/05/09 09:23:45 by psoulie          ###   ########.fr       */
+/*   Updated: 2025/05/15 16:44:27 by achillesoul      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static t_data	*data_init(char **av)
 	pthread_mutex_init(&data->death, NULL);
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->meal, NULL);
-	data = data_check(data);
 	if (av[5])
 		data->nbeat = ft_atoi(av[5]);
+	data = data_check(data);
 	return (data);
 }
 
